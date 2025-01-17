@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* General Styling */
+
+    .welcome {
+      background-color: #ffffff;
+      height: 844px;
+      opacity: 1;
+      overflow: hidden;
+      overflow-x: hidden;
+      position: relative;
+      width: 390px;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .welcome .shapes {
+      --z-index: 0;
+      background-color: transparent;
+      height: 970px;
+      left: -557px;
+      opacity: 1;
+      position: absolute;
+      top: -421px;
+      transform: rotate(28.00deg);
+      width: 970px;
+    }
+
+    .welcome .ellipse-3 {
+      --z-index: 0;
+      background: linear-gradient(180deg, rgba(199.0000033378601, 47.0000009983778, 248.0000004172325, 0) 0%, rgb(199.0000033378601, 47.0000009983778, 248.0000004172325) 100%);
+      background-color: transparent;
+      border-radius: 412.37px/424.68px;
+      height: 849px;
+      left: 145px;
+      opacity: 1;
+      position: absolute;
+      top: -0px;
+      width: 825px;
+    }
+
+    .welcome .ellipse-2 {
+      --z-index: 1;
+      background: linear-gradient(180deg, rgba(198.00000339746475, 48.000000938773155, 248.0000004172325, 0) 0%, rgb(47.0000009983778, 86.00000247359276, 248.0000004172325) 100%);
+      background-color: transparent;
+      border-radius: 412.37px/424.68px;
+      height: 849px;
+      left: 73px;
+      opacity: 1;
+      position: absolute;
+      top: 121px;
+      width: 825px;
+    }
+
+    .welcome .ellipse-1 {
+      --z-index: 2;
+      background: linear-gradient(180deg, rgb(82.00000271201134, 100.00000163912773, 249.00000035762787) 0%, rgb(58.00000034272671, 249.00000035762787, 239.00000095367432) 100%);
+      background-color: transparent;
+      border-radius: 412.37px/424.68px;
+      height: 849px;
+      left: 0px;
+      opacity: 1;
+      position: absolute;
+      top: 53px;
+      width: 825px;
+    }
+
+    /* Welcome Text */
+    .welcome-text {
+      --z-index: 2;
+      background-color: transparent;
+      color: #ffffff;
+      font-family: 'Inter', Helvetica;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 400;
+      height: auto;
+      left: 52px;
+      letter-spacing: 0.00px;
+      line-height: normal;
+      opacity: 1;
+      position: absolute;
+      text-align: left;
+      top: 138px;
+      width: auto;
+    }
+
+    /* Sign In Button */
+    .signin {
+      position: absolute;
+      width: 80%;
+      /* Flexible width for small screens */
+      height: auto;
+      bottom: 20%;
+      /* Adjusted for spacing */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Sign Up Button */
+    .signup {
+      position: absolute;
+      width: 80%;
+      /* Flexible width for small screens */
+      height: auto;
+      bottom: 10%;
+      /* Adjusted for spacing */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="welcome">
+    <!-- Background Shapes -->
+    <div class="shapes" data-id="2:3">
+      <div class="ellipse-3" data-id="1:42"></div>
+      <div class="ellipse-2" data-id="1:41"></div>
+      <div class="ellipse-1" data-id="1:40"></div>
+    </div>
+    <div class="logo-white-1-C61RwL" data-id="1:44"></div>
+
+    <!-- Logo -->
+    <svg class="logo-white" width="60" height="59" viewBox="0 0 60 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_1_44)">
+        <mask id="mask0_1_44" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="59">
+          <path
+            d="M60 17.2441V41.7559C60 51.2796 52.2796 59 42.7559 59C37.701 59 33.1541 56.825 30 53.3598C26.8459 56.825 22.299 59 17.2441 59C7.72044 59 0 51.2796 0 41.7559V17.2441C0 7.72044 7.72044 0 17.2441 0C22.299 0 26.8459 2.17501 30 5.64023C33.1541 2.17501 37.701 0 42.7559 0C52.2796 0 60 7.72044 60 17.2441Z"
+            fill="white" />
+        </mask>
+        <g mask="url(#mask0_1_44)">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M30 5.64022C33.1541 2.17501 37.701 0 42.7559 0C52.2796 0 60 7.72044 60 17.2441V41.7559C60 51.2796 52.2796 59 42.7559 59C37.701 59 33.1541 56.825 30 53.3598C26.8459 56.825 22.299 59 17.2441 59C7.72044 59 0 51.2796 0 41.7559V17.2441C0 7.72044 7.72044 0 17.2441 0C22.299 0 26.8459 2.17501 30 5.64022Z"
+            stroke="white" stroke-width="27.4016" />
+        </g>
+      </g>
+      <defs>
+        <clipPath id="clip0_1_44">
+          <rect width="60" height="59" fill="white" />
+        </clipPath>
+      </defs>
+    </svg>
+
+
+    <!-- Welcome Text -->
+    <h3 class="welcome-text">Welcome<br>Back</h3>
+
+    <div class="sign-up-button-C61RwL"
+      onclick="Lib.autoanim_redirect(&#39;%2A,welcome%23sign-up,,ease-in,400.0000059604645&#39;, event)" onmouseover=""
+      data-id="20:2">
+      <div class="rectangle-2-mT7s7X" data-id="18:47"></div>
+      <div class="sign-up-mT7s7X" data-id="17:30">Sign Up</div>
+      <div class="mask-group-mT7s7X" data-id="18:49"></div>
+      <div class="right-arrow-1-mT7s7X" data-id="18:39"></div>
+    </div>
+    <div class="sign-in-button-C61RwL" onclick="Lib.autoanim_redirect(&#39;sign-in-1,otp-1%23otp-3,,,&#39;, event)"
+      onmouseover="" data-id="20:59">
+      <div class="rectangle-2-xhIs6s" data-id="20:60"></div>
+      <div class="sign-in-xhIs6s" data-id="20:61">Sign In</div>
+      <div class="mask-group-xhIs6s"
+        onclick="Lib.autoanim_redirect(&#39;welcome,welcome%23sign-in-1,,ease-in,400.0000059604645&#39;, event)"
+        onmouseover="" data-id="20:62"></div>
+      <div class="right-arrow-1-xhIs6s" data-id="20:66"></div>
+    </div>
+    <div class="light-portrait-1-C61RwL" data-id="20:3"></div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

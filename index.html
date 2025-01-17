@@ -1,0 +1,78 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruston Schools Splash Screen</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* styles.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.splash-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #372878;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo {
+  margin-bottom: 5px;
+}
+
+.logo img {
+  width: 150px;
+  height: 150px;
+}
+
+.logo-text {
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+</style>
+<script>
+  // script.js
+
+// Set the duration of the splash screen in milliseconds
+const splashScreenDuration = 3000;
+
+// Get the splash screen element
+const splashScreen = document.querySelector('.splash-screen');
+
+// Hide the splash screen after the specified duration
+setTimeout(() => {
+  splashScreen.style.display = 'none';
+}, splashScreenDuration);
+</script>
+</head>
+<body>
+  <div class="splash-screen">
+    <div class="logo">
+      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Ruston Schools Logo">
+    </div>
+    <div class="logo-text">
+      <p>RUSTON <span style="color: #F6D937;">SCHOOLS</span></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

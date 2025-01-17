@@ -1,0 +1,204 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruston School</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* styles.css */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F2F2F2;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .circle {
+      position: absolute;
+      bottom: 0;
+      left: -134px;
+      bottom: -133px;
+      width: 470px;
+      height: 470px;
+      border-radius: 50%;
+      background-color: #F5F2FC;
+      z-index: -1000;
+    }
+    .logo {
+      position: absolute;
+      top: 5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    .illustration {
+      position: relative;
+      width: 256px;
+      height: 256px;
+      margin-top: 25vh;
+      margin-bottom: 10px;
+      z-index: 2;
+    }
+
+    .illustration img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .text {
+      position: relative;
+      width: 80%;
+      height: 50vh;
+      display: flex;
+      justify-content: flex-start;
+      align-items: left;
+      flex-direction: column;
+      z-index: 3;
+      margin-top: -10px;
+    }
+
+    .text h2 {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 31px;
+      margin-bottom: 10px;
+      color: #3B2877;
+    }
+
+    .button {
+      position: relative;
+      width: 80%;
+      height: 50px;
+      background-color: #3B2877;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #2F236F;
+    }
+
+    p {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 15px;
+      /* identical to box height, or 83% */
+
+      color: #3B2877;
+
+      opacity: 0.8;
+
+    }
+
+    .circular-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #3B2877;
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+    }
+
+    .circular-button i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+    }
+
+    .indicators {
+      position: absolute;
+      width: 80px;
+      height: 10px;
+      left: calc(50% - 80px/2);
+      bottom: 80px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .indicator {
+      width: 10px;
+      height: 10px;
+      background: #B5BFFF;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .indicator.active {
+      /* Rectangle 23 */
+      width: 44px;
+      height: 10px;
+      background: #3B2877;
+      border-radius: 6px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="circle"></div>
+    <div class="logo">
+      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+    </div>
+    <div class="illustration">
+      <img src="assets/svg/welcom.svg" alt="Welcome illustration">
+    </div>
+    <div class="text">
+      <h2>Welcome to <br>Ruston School</h2>
+      <p>Developing a Total Child.</p>
+    </div>
+    <div class="indicators">
+      <div class="indicator active"></div>
+      <div class="indicator"></div>
+      <div class="indicator"></div>
+    </div>
+    <button class="circular-button">
+      <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

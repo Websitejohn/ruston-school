@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        .sign-in,
+        .sign-in * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Full viewport height */
+            margin: 0;
+            /* Removes default margin */
+            padding: 0;
+            position: relative;
+            /* Removes default padding */
+            width: 100vw;
+            overflow: hidden;
+            overflow-x: hidden;
+        }
+
+        .sign-in {
+            width: 100vw;
+            overflow: hidden;
+            overflow-x: hidden;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .shapes {
+            position: absolute;
+            inset: 0;
+        }
+
+        .ellipse-3 {
+            background: linear-gradient(53.25deg,
+                    rgba(199, 47, 248, 0) 0%,
+                    rgba(199, 47, 248, 1) 100%);
+            border-radius: 50%;
+            width: 352px;
+            height: 352px;
+            position: absolute;
+            left: -12px;
+            top: -106px;
+        }
+
+        .ellipse-2 {
+            background: linear-gradient(145.35deg,
+                    rgba(198, 48, 248, 0) 0%,
+                    rgba(47, 86, 248, 1) 100%);
+            border-radius: 50%;
+            width: 352px;
+            height: 352px;
+            position: absolute;
+            left: -43px;
+            top: -56px;
+        }
+
+        .ellipse-1 {
+            background: linear-gradient(137.76deg,
+                    rgba(82, 100, 249, 1) 0%,
+                    rgba(58, 249, 239, 1) 100%);
+            border-radius: 50%;
+            width: 352px;
+            height: 352px;
+            position: absolute;
+            left: -74px;
+            top: -84px;
+        }
+
+        .logo-white-1 {
+            width: 60px;
+            height: 59px;
+            position: absolute;
+            left: 52px;
+            top: 64px;
+            overflow: hidden;
+        }
+
+        .page-1 {
+            height: auto;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            overflow: visible;
+        }
+
+        .welcome-back {
+            color: #ffffff;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            position: absolute;
+            left: 52px;
+            top: 139px;
+        }
+
+        .sign-in2 {
+            color: #000000;
+            text-align: left;
+            font-family: "Inter-Bold", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            position: absolute;
+            left: 30px;
+            bottom: 58.53%;
+            top: 37.44%;
+            height: 4.03%;
+        }
+
+        .email-address {
+            width: 315px;
+            height: 6.87%;
+            position: absolute;
+            left: calc(50% - 157px);
+            bottom: 46.21%;
+            top: 46.92%;
+        }
+
+        .line-1 {
+            margin-top: -1px;
+            border-style: solid;
+            border-color: #2743fd;
+            border-width: 1px 0 0 0;
+            width: 315px;
+            height: 0px;
+            position: absolute;
+            left: calc(50% - 157.5px);
+            top: calc(50% - -29px);
+        }
+
+        .email-address2 {
+            color: #b9b9b9;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        .design-test-com {
+            color: #000000;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0px;
+            top: 33px;
+        }
+
+        .tick-1 {
+            width: 18px;
+            height: 13px;
+            position: absolute;
+            left: 281px;
+            top: 28px;
+            overflow: hidden;
+        }
+
+        .page-12 {
+            height: auto;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            overflow: visible;
+        }
+
+        .forgot-password {
+            color: #2847fc;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            left: 30px;
+            bottom: 32.58%;
+            top: 65.4%;
+            position: relative;
+            width: 119px;
+            height: 17px;
+
+        }
+
+        .sign-in-button {
+            width: 315px;
+            height: 73px;
+            position: absolute;
+            left: calc(50% - 157px);
+            bottom: 60px;
+        }
+
+        .rectangle-2 {
+            background: linear-gradient(-78.68deg,
+                    rgba(20, 51, 255, 1) 0%,
+                    rgba(73, 96, 249, 1) 100%);
+            border-radius: 28px;
+            width: 315px;
+            height: 72px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            box-shadow: 0px 8px 16px 0px rgba(27, 57, 255, 0.2);
+        }
+
+        .sign-in3 {
+            color: #ffffff;
+            text-align: left;
+            font-family: "Montserrat-Regular", sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            position: absolute;
+            left: 19px;
+            top: 24px;
+        }
+
+        .mask-group {
+            height: auto;
+            position: absolute;
+            left: 0px;
+            top: 1px;
+            overflow: visible;
+        }
+
+        .right-arrow-1 {
+            width: 19px;
+            height: 15px;
+            position: absolute;
+            left: 269px;
+            top: 29px;
+            overflow: hidden;
+        }
+
+        .clip-path-group {
+            height: auto;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            overflow: visible;
+        }
+
+        .light-portrait-1 {
+            width: 134px;
+            height: 34px;
+            position: absolute;
+            left: calc(50% - 67px);
+            top: 812px;
+            overflow: hidden;
+        }
+
+        .bars-home-indicator-i-phone-light-portrait {
+            width: 100%;
+            height: 14.71%;
+            position: absolute;
+            right: 0%;
+            left: 0%;
+            bottom: 23.53%;
+            top: 61.76%;
+            overflow: visible;
+        }
+
+        .group-12 {
+            position: absolute;
+            inset: 0;
+        }
+
+        .password {
+            width: 315px;
+            height: 6.87%;
+            position: absolute;
+            left: calc(50% - 157px);
+            bottom: 37.32%;
+            top: 55.81%;
+        }
+
+        .password2 {
+            color: #b9b9b9;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        .div {
+            color: #000000;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0px;
+            top: 33px;
+        }
+
+        .eye-1 {
+            width: 18px;
+            height: 12px;
+            position: absolute;
+            left: 281px;
+            top: 30px;
+            overflow: hidden;
+        }
+
+        .eye-hidden-1 {
+            width: 18px;
+            height: 2.01%;
+            position: absolute;
+            left: calc(50% - -122px);
+            bottom: 38.86%;
+            top: 59.12%;
+            overflow: hidden;
+        }
+
+        .page-13 {
+            height: auto;
+            position: absolute;
+            left: 0px;
+            top: 1.57px;
+            overflow: visible;
+        }
+
+
+        /* Input Group */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #b9b9b9;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 40px 10px 0;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #2743fd;
+            outline: none;
+            color: #000;
+            transition: border-color 0.3s;
+
+        }
+
+        .input-group input:focus {
+            border-color: #a560e2;
+        }
+
+        .input-group input::placeholder {
+            color: #b9b9b9;
+        }
+
+        /* Tick Icon */
+        .tick-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #a560e2;
+            display: none;
+        }
+
+        .input-group input:valid+.tick-icon {
+            display: block;
+        }
+
+        /* Eye Icon */
+        .eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #b9b9b9;
+            cursor: pointer;
+        }
+
+        /* Email Address Field */
+        .email-address,
+        .email-address * {
+            box-sizing: border-box;
+        }
+
+        .email-address {
+            width: 315px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .line-1 {
+            margin-top: -1px;
+            border-style: solid;
+            border-color: #2743fd;
+            border-width: 1px 0 0 0;
+            width: 100%;
+            height: 0;
+            position: absolute;
+            left: 0;
+            top: 33px;
+        }
+
+        label .email-address2 {
+            color: #b9b9b9;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 2px solid #2743fd;
+            outline: none;
+            color: #000;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .tick-1 {
+            width: 18px;
+            height: 13px;
+            position: absolute;
+            left: 281px;
+            top: 28px;
+            overflow: hidden;
+        }
+
+        .page-12 {
+            height: auto;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Password Field */
+        .password,
+        .password * {
+            box-sizing: border-box;
+        }
+
+        .password {
+            width: 315px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .line-1 {
+            margin-top: -1px;
+            border-style: solid;
+            border-color: #2743fd;
+            border-width: 1px 0 0 0;
+            width: 100%;
+            height: 0;
+            position: absolute;
+            left: 0;
+            top: 33px;
+        }
+
+        .password2 {
+            color: #b9b9b9;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 10px 40px 10px 10px;
+            font-size: 14px;
+            border: none;
+            border-bottom: 2px solid #2743fd;
+            outline: none;
+            color: #000;
+            background-color: transparent;
+            position: relative;
+        }
+
+        .eye-1 {
+            width: 18px;
+            height: 13px;
+            position: absolute;
+            left: 281px;
+            top: 28px;
+        }
+
+        .page-13 {
+            height: auto;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Eye icon toggle functionality */
+        .eye-1 img {
+            cursor: pointer;
+        }
+
+        .email-address {
+            /* Email Address */
+            position: absolute;
+            width: 315px;
+            left: calc(50% - 315px/2 + 0.5px);
+            top: 46.92%;
+            bottom: 46.21%;
+        }
+
+        .password {
+            /* Password */
+            position: absolute;
+            width: 315px;
+            left: calc(50% - 315px/2 + 0.5px);
+            top: 55.81%;
+            bottom: 37.32%;
+            margin-top: 30px;
+
+
+        }
+
+        input {
+            color: #000000;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            left: 0px;
+            top: 33px;
+        }
+
+        .forgot-password,
+        .forgot-password * {
+            box-sizing: border-box;
+        }
+
+        .forgot-password {
+            color: #2847fc;
+            text-align: left;
+            font-family: "Inter-Regular", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            position: relative;
+            width: 119px;
+            height: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sign-in">
+        <div class="ellipse-3"></div>
+        <div class="ellipse-2"></div>
+        <div class="ellipse-1"></div>
+        <div class="logo-white-1">
+            <img class="page-1" src="assets/svg/Logo-White 1.svg" />
+        </div>
+        <div class="welcome-back">
+            Welcome
+            <br />
+            Back
+        </div>
+
+
+        <div class="sign-in2">Sign In</div>
+        <form class="sign-in-form">
+            <div class="email-address">
+                <label class="email-address2">Email Address</label>
+                <input type="email" name="email" class="email-input" placeholder="design@test.com" required />
+                <div class="tick-1">
+                    <img class="page-12" src="tick-icon.svg" alt="tick-icon" />
+                </div>
+            </div>
+
+            <div class="password">
+
+                <div class="password2">Password</div>
+                <input type="password" class="password-input" placeholder="••••••" />
+                <div class="eye-1">
+                    <img class="page-13" src="eye-icon.svg" alt="eye-icon" />
+                </div>
+            </div>
+
+
+        </form>
+
+        <div class="forgot-password">Forgot Password?</div>
+        <div class="sign-in-button">
+            <div class="rectangle-2"></div>
+            <div class="sign-in3">Sign In</div>
+            <img class="mask-group" src="assets/svg/Mask group.svg" />
+            <div class="right-arrow-1">
+                <img class="clip-path-group" src="assets/svg/Right-Arrow 0.svg" />
+            </div>
+        </div>
+        <div class="light-portrait-1">
+            <img class="bars-home-indicator-i-phone-light-portrait"
+                src="bars-home-indicator-i-phone-light-portrait0.svg" />
+        </div>
+</body>
+
+</html>
