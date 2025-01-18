@@ -23,6 +23,44 @@
       background-color: #F2F2F2;
     }
 
+    .screen {
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .screen.inactive {
+      opacity: 0;
+    }
+
+    .screen.active {
+      opacity: 1;
+    }
+
+    .indicator {
+      transition: background-color 0.5s ease-in-out;
+    }
+
+    .indicator.active {
+      background-color: #3B2877;
+    }
+
+    .loading {
+      animation: loading 2s infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
+    }
+
     .container {
       position: relative;
       width: 100%;
@@ -100,7 +138,7 @@
     }
 
     @media (min-width: 768px) {
-     
+
 
       .indicators {
         bottom: 40px;
@@ -108,7 +146,7 @@
     }
 
     @media (max-width: 480px) {
-     
+
       .indicators {
         bottom: 10px;
       }
@@ -166,7 +204,7 @@
       cursor: pointer;
     }
 
-    .circular-button i {
+    .circular-button svg {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -244,11 +282,71 @@
         line-height: 25px;
       }
     }
+
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-inner {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .loader-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #3B2877;
+      animation: loader-circle 1s infinite;
+    }
+
+    @keyframes loader-circle {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="screen active">
+    <div class="preloader">
+      <div class="loader">
+        <div class="loader-inner">
+          <div class="loader-circle"></div>
+          <div class="loader-circle"></div>
+          <div class="loader-circle"></div>
+        </div>
+      </div>
+    </div>
     <div class="circle"></div>
     <div class="logo">
       <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
@@ -265,9 +363,9 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
     </div>
-    <button class="circular-button">
-      <i class="fas fa-arrow-right"></i>
-    </button>
+    <a href="#" class="circular-button">
+      <svg src="assets/svg/Right-Arrow 1.svg"></svg>
+    </a>
   </div>
   <div class="screen inactive">
     <div class="circle"></div>
@@ -275,7 +373,7 @@
       <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
     </div>
     <div class="illustration">
-      <img src="assets/svg/welcom.svg" alt="Welcome illustration">
+      <img src="assets/svg/Learning-cuate.svg" alt="Welcome illustration">
     </div>
     <div class="text">
       <h2>Our Mission</h2>
@@ -286,9 +384,9 @@
       <div class="indicator active"></div>
       <div class="indicator"></div>
     </div>
-    <button class="circular-button">
-      <i class="fas fa-arrow-right"></i>
-    </button>
+    <a href="#" class="circular-button">
+      <svg src="assets/svg/Right-Arrow 1.svg"></svg>
+    </a>
   </div>
   <div class="screen inactive ```html
 ">
@@ -297,7 +395,7 @@
       <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
     </div>
     <div class="illustration">
-      <img src="assets/svg/welcom.svg" alt="Welcome illustration">
+      <img src="assets/svg/Learning-pana.svg" alt="Welcome illustration">
     </div>
     <div class="text">
       <h2>Join Us</h2>
@@ -309,10 +407,19 @@
       <div class="indicator active"></div>
     </div>
     <a class="circular-button">
-      <i class="fas fa-arrow-right"></i>
+      <svg src="assets/svg/Right-Arrow 1.svg"></svg>
     </a>
   </div>
   <script src="script.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      const preloader = document.querySelector('.preloader');
+      preloader.classList.add('hidden');
+      setTimeout(() => {
+        preloader.remove();
+      }, 1000);
+    });
+  </script>
 </body>
 
 </html>
