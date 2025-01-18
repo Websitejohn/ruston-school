@@ -1,10 +1,10 @@
 const screens = document.querySelectorAll('.screen');
 const indicators = document.querySelectorAll('.indicator');
 const circularButton = document.querySelectorAll('.circular-button');
+const illustrations = document.querySelectorAll('.illustration');
 let currentIndex = 0;
 let touchStartX = 0;
 let touchEndX = 0;
-
 
 // Function to update the current screen and indicator
 function updateScreen(index) {
@@ -42,16 +42,16 @@ indicators.forEach((indicator, index) => {
 });
 
 // Add event listeners for swipe gestures
-screens.forEach((screen) => {
-  screen.addEventListener('touchstart', (event) => {
+illustrations.forEach((illustration) => {
+  illustration.addEventListener('touchstart', (event) => {
     touchStartX = event.touches[0].clientX;
   });
 
-  screen.addEventListener('touchmove', (event) => {
-    event.preventDefault();
-  });
+  illustration.addEventListener('touchmove', (event) => {
+    // Don't prevent the default behavior of the touchmove event
+  }, { passive: true });
 
-  screen.addEventListener('touchend', (event) => {
+  illustration.addEventListener('touchend', (event) => {
     touchEndX = event.changedTouches[0].clientX;
     const swipeDistance = touchEndX - touchStartX;
 
