@@ -2,7 +2,6 @@
 const screens = document.querySelectorAll('.screen');
 const indicators = document.querySelectorAll('.indicator');
 const circularButton = document.querySelectorAll('.circular-button');
-const illustrations = document.querySelectorAll('.illustration');
 const backButtons = document.querySelectorAll('.back-button');
 
 // Initialize the current index and touch coordinates
@@ -61,16 +60,18 @@ indicators.forEach((indicator, index) => {
 });
 
 // Add event listeners for swipe gestures
-illustrations.forEach((illustration) => {
-  illustration.addEventListener('touchstart', (event) => {
+document.addEventListener('touchstart', (event) => {
+  if (event.target.classList.contains('screen')) {
     touchStartX = event.touches[0].clientX;
-  });
+  }
+});
 
-  illustration.addEventListener('touchmove', (event) => {
-    // Don't prevent the default behavior of the touchmove event
-  }, { passive: true });
+document.addEventListener('touchmove', (event) => {
+  // Don't prevent the default behavior of the touchmove event
+}, { passive: true });
 
-  illustration.addEventListener('touchend', (event) => {
+document.addEventListener('touchend', (event) => {
+  if (event.target.classList.contains('screen')) {
     touchEndX = event.changedTouches[0].clientX;
     const swipeDistance = touchEndX - touchStartX;
 
@@ -81,7 +82,7 @@ illustrations.forEach((illustration) => {
       // Swipe left
       updateScreen((currentIndex - 1 + screens.length) % screens.length);
     }
-  });
+  }
 });
 
 // Add event listeners to the back buttons
