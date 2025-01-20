@@ -406,78 +406,85 @@
 
 
 
-
     .buttons {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 20px;
-      width: 80%;
-      max-width: 400px;
-      z-index: 10;
-      padding: 0 20px;
-    }
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    max-width: 400px;
+    z-index: 10;
+    padding: 0 20px;
+}
 
-    .button {
-      flex: 1;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
-    }
+.button {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+    
+    /* Center text both horizontally and vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    min-height: 48px; /* Ensure consistent button height */
+}
 
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .buttons {
+/* Keep your existing button styles */
+.button.login {
+    background-color: #3B2877;
+    color: #FFFFFF;
+    border: 2px solid #3B2877;
+}
+
+.button.login:hover {
+    background-color: #2F236F;
+    border-color: #2F236F;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 40, 119, 0.3);
+}
+
+.button.register {
+    background-color: transparent;
+    color: #3B2877;
+    border: 2px solid #3B2877;
+}
+
+.button.register:hover {
+    background-color: rgba(59, 40, 119, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 40, 119, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .buttons {
         bottom: 20px;
         width: 90%;
         padding: 0 16px;
-      }
+    }
 
-      .button {
+    .button {
         padding: 12px 20px;
         font-size: 14px;
-      }
+        min-height: 44px; /* Slightly smaller height on mobile */
     }
+}
 
-    /* Safe area inset for modern devices */
-    @supports (padding: max(0px)) {
-      .buttons {
+/* Safe area inset for modern devices */
+@supports (padding: max(0px)) {
+    .buttons {
         bottom: max(40px, env(safe-area-inset-bottom));
-      }
     }
-
-    /* Keep your existing button styles */
-    .button.login {
-      background-color: #3B2877;
-      color: #FFFFFF;
-      border: 2px solid #3B2877;
-    }
-
-    .button.login:hover {
-      background-color: #2F236F;
-      border-color: #2F236F;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(59, 40, 119, 0.3);
-    }
-
-    .button.register {
-      background-color: transparent;
-      color: #3B2877;
-      border: 2px solid #3B2877;
-    }
-
-    .button.register:hover {
-      background-color: rgba(59, 40, 119, 0.1);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(59, 40, 119, 0.1);
-    }
+}
   </style>
 </head>
 
