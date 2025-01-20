@@ -1,118 +1,95 @@
-// Get all the screens, indicators, circular buttons, illustrations, and back buttons
-const screens = document.querySelectorAll('.screen');
-const indicators = document.querySelectorAll('.indicator');
-const circularButton = document.querySelectorAll('.circular-button');
-const backButtons = document.querySelectorAll('.back-button');
+  // Improved JavaScript organization
+  class OnboardingCarousel {
+    constructor() {
+        this.screens = document.querySelectorAll('.screen');
+        this.indicators = document.querySelectorAll('.indicator');
+        this.circularButtons = document.querySelectorAll('.circular-button');
+        this.backButtons = document.querySelectorAll('.back-button');
+        this.currentIndex = 0;
+        this.touchStartX = 0;
+        this.touchEndX = 0;
 
-// Initialize the current index and touch coordinates
-let currentIndex = 0;
-let touchStartX = 0;
-let touchEndX = 0;
-
-// Function to update the current screen and indicator
-function updateScreen(index) {
-  try {
-    screens.forEach((screen, screenIndex) => {
-      screen.classList.remove('active');
-      screen.classList.add('inactive');
-      indicators[screenIndex].classList.remove('active');
-    });
-
-    screens[index].classList.remove('inactive');
-    screens[index].classList.add('active');
-    indicators[index].classList.add('active');
-
-    currentIndex = index;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Function to navigate to the next screen
-function navigateToNextScreen() {
-  updateScreen((currentIndex + 1) % screens.length);
-}
-
-// Function to handle login button click
-function handleLoginButtonClick() {
-  // Add your login logic here
-}
-
-// Function to handle register button click
-function handleRegisterButtonClick() {
-  // Add your register logic here
-}
-
-// Add event listeners to the circular buttons
-circularButton.forEach((button, index) => {
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-    navigateToNextScreen();
-  });
-});
-
-// Add event listeners to the indicators
-indicators.forEach((indicator, index) => {
-  indicator.addEventListener('click', (event) => {
-    event.preventDefault();
-    updateScreen(index);
-  });
-});
-
-// Add event listeners for swipe gestures
-document.addEventListener('touchstart', (event) => {
-  if (event.target.classList.contains('screen')) {
-    touchStartX = event.touches[0].clientX;
-  }
-});
-
-document.addEventListener('touchmove', (event) => {
-  // Don't prevent the default behavior of the touchmove event
-}, { passive: true });
-
-document.addEventListener('touchend', (event) => {
-  if (event.target.classList.contains('screen')) {
-    touchEndX = event.changedTouches[0].clientX;
-    const swipeDistance = touchEndX - touchStartX;
-
-    if (swipeDistance > 100) {
-      // Swipe right
-      navigateToNextScreen();
-    } else if (swipeDistance < -100) {
-      // Swipe left
-      updateScreen((currentIndex - 1 + screens.length) % screens.length);
+        this.init();
     }
-  }
-});
 
-// Add event listeners to the back buttons
-backButtons.forEach((button, index) => {
-  button.addEventListener('click', (event) => {
-    event.preventDefault();
-    if (currentIndex > 0) {
-      updateScreen(currentIndex - 1);
+    init() {
+        this.setupEventListeners();
+        this.handlePreloader();
     }
-  });
-});
 
-// Add event listeners for keyboard navigation
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowRight') {
-    navigateToNextScreen();
-  } else if (event.key === 'ArrowLeft') {
-    updateScreen((currentIndex - 1 + screens.length) % screens.length);
-  }
-});
+    handlePreloader() {
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 500);
+        });
+    }
 
-// Add event listeners to the screens
-screens.forEach((screen) => {
-  const loginButton = screen.querySelector('.login');
-  if (loginButton) {
-    loginButton.addEventListener('click', handleLoginButtonClick);
-  }
+    updateScreen(index) {
+        if (index < 0 || index >= this.screens.length) return;
+        
+        this.screens.forEach((screen, i) => {
+            screen.classList.toggle('active', i === index);
+            screen.classList.toggle('inactive', i !== index);
+            this.indicators[i].classList.toggle('active', i === index);
+            this.indicators[i].setAttribute('aria-selected', i === index);
+        });
 
-  const registerButton = screen.querySelector('.register');
-  if (registerButton) {
-    registerButton.addEventListener('click', handleRegisterButtonClick);
-  }
+        this.currentIndex = index;
+    }
+
+    setupEventListeners() {
+        // Touch events
+        document.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+        document.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+
+        // Button clicks
+        this.circularButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.updateScreen((this.currentIndex + 1) % this.screens.length);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+        // Indicator clicks
+        this.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => this.updateScreen(index));
+        });
+    }
+
+    handleTouchStart(e) {
+        this.touchStartX = e.touches[0].clientX;
+    }
+
+    handleTouchEnd(e) {
+        this.touchEndX = e.changedTouches[0].clientX;
+        const swipeDistance = this.touchEndX - this.touchStartX;
+
+        if (Math.abs(swipeDistance) > 100) {
+            const newIndex = swipeDistance > 0 
+                ? (this.currentIndex - 1 + this.screens.length) % this.screens.length
+                : (this.currentIndex + 1) % this.screens.length;
+            this.updateScreen(newIndex);
+        }
+    }
+
+    handleKeydown(e) {
+        if (e.key === 'ArrowRight') {
+            this.updateScreen((this.currentIndex + 1) % this.screens.length);
+        } else if (e.key === 'ArrowLeft') {
+            this.updateScreen((this.currentIndex - 1 + this.screens.length) % this.screens.length);
+        }
+    }
+}
+
+// Initialize the carousel
+document.addEventListener('DOMContentLoaded', () => {
+    new OnboardingCarousel();
 });

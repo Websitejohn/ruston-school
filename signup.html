@@ -1,250 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Sign Up - Ruston School</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <style>
+      /* Base styles from style.css remain the same */
 
-        /* Form Container */
-        .form-container {
-            position: absolute;
-            width: 315px;
-            height: 58px;
-            left: 38px;
-            top: 396px;
-        }
+/* Multi-step Form Specific Styles */
+.form-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
 
-        /* Wrapper for Input */
-        .input-wrapper {
-            position: relative;
-            width: 315px;
-            height: 58px;
-            margin: 0 auto;
-        }
+.form-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        /* Label Styling */
-        .label {
-            position: absolute;
-            width: 94px;
-            height: 17px;
-            left: 0px;
-            top: 0px;
-            font-size: 14px;
-            font-weight: 400;
-            color: #b9b9b9;
-        }
+/* Step Indicators */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 0;
+    position: relative;
+}
 
-        /* Form Section */
-        .form {
-            position: absolute;
-            width: 315px;
-            height: 58px;
-            left: 30px;
-            top: 396px;
-        }
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: #E0E0E0;
+    z-index: 1;
+}
 
-        /* Input Group */
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
+.step {
+    position: relative;
+    z-index: 2;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-        /* Label */
-        .input-group label {
-            font-size: 14px;
-            margin-bottom: 5px;
-            display: block;
-            color: #b9b9b9;
-        }
+.step::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #F0F0F0;
+    border: 2px solid #E0E0E0;
+    transition: all 0.3s ease;
+}
 
-        /* Input Field */
-        .input-group input {
-            width: 100%;
-            padding: 10px 40px 10px 0;
-            font-size: 14px;
-            border: none;
-            border-bottom: 2px solid #2743fd;
-            outline: none;
-            /* Prevent default highlighting */
-            color: #000;
-        }
+.step.active {
+    color: #3B2877;
+    font-weight: 600;
+}
 
-        /* Remove Highlighting on Focus */
-        
+.step.active::before {
+    background: #3B2877;
+    border-color: #3B2877;
+    box-shadow: 0 0 0 4px rgba(59, 40, 119, 0.1);
+}
 
-        /* Placeholder Styling */
-        .input-group input::placeholder {
-            color: #b9b9b9;
-        }
+.step.completed::before {
+    background: #3B2877 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E") no-repeat center center;
+    border-color: #3B2877;
+}
 
-        /* Icon Styling */
-        .tick-icon,
-        .eye-icon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 10px;
-            font-size: 18px;
-            color: #CB3EF9;
-            cursor: pointer;
-        }
+/* Progress Bar */
+.progress-bar {
+    height: 4px;
+    background: #E0E0E0;
+    border-radius: 2px;
+    margin: 24px 0;
+    overflow: hidden;
+}
 
-        /* Tick Icon Hidden by Default */
-        .tick-icon {
-            display: none;
-        }
-        
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3B2877, #5B3E99);
+    width: 0%;
+    transition: width 0.4s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+/* Form Steps */
+.form-step {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.form-step.active {
+    display: block;
+}
+
+/* Form Navigation */
+.form-navigation {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.nav-button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.back-button {
+    background: #F0F0F0;
+    color: #666;
+}
+
+.back-button:hover {
+    background: #E5E5E5;
+    transform: translateY(-2px);
+}
+
+.next-button {
+    background: #3B2877;
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+}
+
+.next-button:hover {
+    background: #4B3587;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 40, 119, 0.3);
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    height: 4px;
+    background: #E0E0E0;
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+}
+
+.strength-fill.weak { 
+    width: 33%; 
+    background: #FF4D4D; 
+}
+
+.strength-fill.medium { 
+    width: 66%; 
+    background: #FFA726; 
+}
+
+.strength-fill.strong { 
+    width: 100%; 
+    background: #00C853; 
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .step-indicator {
+        margin: 24px 0;
+    }
+
+    .step {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .step::before {
+        width: 20px;
+        height: 20px;
+    }
+
+    .form-navigation {
+        margin-top: 24px;
+    }
+
+    .nav-button {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .step {
+        background: #1E1E1E;
+    }
+
+    .step-indicator::before {
+        background: #333;
+    }
+
+    .back-button {
+        background: #333;
+        color: #FFF;
+    }
+
+    .back-button:hover {
+        background: #444;
+    }
+
+    .password-strength {
+        background: #333;
+    }
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #E0E0E0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: #F8F8F8;
+}
+
+.form-input:focus {
+  border-color: #3B2877;
+  background: white;
+  outline: none;
+  box-shadow: 0 4px 12px rgba(59, 40, 119, 0.1);
+}
+
+.forgot-link {
+  display: block;
+  text-align: right;
+  color: #3B2877;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin: -12px 0 24px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: #3B2877;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+}
+
+.submit-button:hover {
+  background: #4B3587;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 40, 119, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #3B2877 0%, #5B3E99 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.app-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.app-logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.app-title {
+  color: #3B2877;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.app-subtitle {
+  color: #666;
+  font-size: 16px;
+}
+
+.role-tabs {
+  display: flex;
+  background: #F0F0F0;
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.role-tab {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-tab.active {
+  background: #3B2877;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+}
     </style>
 </head>
-
 <body>
-    <svg width="340" height="296" viewBox="0 0 340 296" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="164" cy="70" r="176" fill="url(#paint0_linear_20_7)" />
-        <circle cx="133" cy="120" r="176" fill="url(#paint1_linear_20_7)" />
-        <circle cx="102" cy="92" r="176" fill="url(#paint2_linear_20_7)" />
-        <defs>
-            <linearGradient id="paint0_linear_20_7" x1="-128" y1="332.5" x2="340" y2="-17"
-                gradientUnits="userSpaceOnUse">
-                <stop stop-color="#C72FF8" stop-opacity="0" />
-                <stop offset="1" stop-color="#C72FF8" />
-            </linearGradient>
-            <linearGradient id="paint1_linear_20_7" x1="-8.99998" y1="-15" x2="230.5" y2="331.5"
-                gradientUnits="userSpaceOnUse">
-                <stop stop-color="#C630F8" stop-opacity="0" />
-                <stop offset="1" stop-color="#2F56F8" />
-            </linearGradient>
-            <linearGradient id="paint2_linear_20_7" x1="-40" y1="-43" x2="217" y2="240" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5264F9" />
-                <stop offset="1" stop-color="#3AF9EF" />
-            </linearGradient>
-        </defs>
-    </svg>
+    <div class="app-container">
+        <div class="app-header">
+            <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Ruston School" class="app-logo">
+            <h1 class="app-title">Create Account</h1>
+            <p class="app-subtitle">Join our community</p>
+        </div>
 
-    <svg style="/* Logo-White 1 */
+        <div class="role-tabs">
+            <button class="role-tab active" data-role="student">Student</button>
+            <button class="role-tab" data-role="parent">Parent</button>
+            <button class="role-tab" data-role="teacher">Teacher</button>
+        </div>
 
-    position: absolute;
-    width: 60px;
-    height: 59px;
-    left: 52px;
-    top: 64px;
-    
-    " width="60" height="59" viewBox="0 0 60 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clip-path="url(#clip0_20_11)">
-            <mask id="mask0_20_11" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60"
-                height="59">
-                <path
-                    d="M60 17.2441V41.7559C60 51.2796 52.2796 59 42.7559 59C37.701 59 33.1541 56.825 30 53.3598C26.8459 56.825 22.299 59 17.2441 59C7.72044 59 0 51.2796 0 41.7559V17.2441C0 7.72044 7.72044 0 17.2441 0C22.299 0 26.8459 2.17501 30 5.64023C33.1541 2.17501 37.701 0 42.7559 0C52.2796 0 60 7.72044 60 17.2441Z"
-                    fill="white" />
-            </mask>
-            <g mask="url(#mask0_20_11)">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M30 5.64022C33.1541 2.17501 37.701 0 42.7559 0C52.2796 0 60 7.72044 60 17.2441V41.7559C60 51.2796 52.2796 59 42.7559 59C37.701 59 33.1541 56.825 30 53.3598C26.8459 56.825 22.299 59 17.2441 59C7.72044 59 0 51.2796 0 41.7559V17.2441C0 7.72044 7.72044 0 17.2441 0C22.299 0 26.8459 2.17501 30 5.64022Z"
-                    stroke="white" stroke-width="27.4016" />
-            </g>
-        </g>
-        <defs>
-            <clipPath id="clip0_20_11">
-                <rect width="60" height="59" fill="white" />
-            </clipPath>
-        </defs>
-    </svg>
-
-    <h3>Welcome
-        Back</h3>
-    <h2 style="position: absolute;
-        width: 100px;
-        height: 34px;
-        left: 30px;
-        top: 335px;
-        
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 28px;
-        line-height: 34px;
-        /* identical to box height */
-        
-        color: #000000;
-        
-        ">Sign Up</h2>
-    <div class="container">
-        <!-- Form Section -->
-        <form class="form">
-            <!-- Email Input -->
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email">
-                <span class="tick-icon"><i class="fas fa-check"></i></span>
+        <!-- Student Registration Form -->
+        <form id="studentForm" class="form-section active">
+            <div class="step-indicator">
+                <div class="step active">Personal Info</div>
+                <div class="step">Academic Info</div>
+                <div class="step">Additional Info</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
             </div>
 
-            <!-- Password Input -->
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password">
-                <span class="eye-icon"><i class="fas fa-eye-slash"></i></span>
+            <!-- Step 1: Personal Information -->
+            <div class="form-step active">
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-input" required>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dob">Date of Birth</label>
+                    <input type="date" id="dob" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="gender">Gender</label>
+                    <select id="gender" class="select-input" required>
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+            </div>
+
+            <!-- Step 2: Academic Information -->
+            <div class="form-step">
+                <div class="form-group">
+                    <label class="form-label" for="grade">Grade Level</label>
+                    <select id="grade" class="select-input" required>
+                        <option value="">Select grade</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                        <option value="9">Grade 9</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11</option>
+                        <option value="12">Grade 12</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="section">Section</label>
+                    <select id="section" class="select-input" required>
+                        <option value="">Select section</option>
+                        <option value="A">Section A</option>
+                        <option value="B">Section B</option>
+                        <option value="C">Section C</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="studentId">Student ID (if existing)</label>
+                    <input type="text" id="studentId" class="form-input">
+                </div>
+            </div>
+
+            <!-- Step 3: Additional Information -->
+            <div class="form-step">
+                <div class="form-group">
+                    <label class="form-label" for="address">Home Address</label>
+                    <input type="text" id="address" class="form-input" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input" required>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label" for="emergency">Emergency Contact</label>
+                        <input type="tel" id="emergency" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Create Password</label>
+                    <input type="password" id="password" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-input" required>
+                </div>
+            </div>
+
+            <div class="form-navigation">
+                <button type="button" class="nav-button back-button" style="display: none;">Back</button>
+                <button type="button" class="nav-button next-button">Next</button>
             </div>
         </form>
-    </div>
-    <h5><a href="#" style="text-decoration: none;">Forgot Password?</a></h5>
-    <svg class="signin" style="top: 711;" width="347" height="104" viewBox="0 0 347 104" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_20_181)">
-        <rect x="16" y="8" width="315" height="72" rx="28" fill="url(#paint0_linear_20_181)"/>
-        </g>
-        <path d="M41.14 51.12C40.1 51.12 39.1 50.9533 38.14 50.62C37.1933 50.2733 36.46 49.8333 35.94 49.3L36.52 48.16C37.0133 48.64 37.6733 49.0467 38.5 49.38C39.34 49.7 40.22 49.86 41.14 49.86C42.02 49.86 42.7333 49.7533 43.28 49.54C43.84 49.3133 44.2467 49.0133 44.5 48.64C44.7667 48.2667 44.9 47.8533 44.9 47.4C44.9 46.8533 44.74 46.4133 44.42 46.08C44.1133 45.7467 43.7067 45.4867 43.2 45.3C42.6933 45.1 42.1333 44.9267 41.52 44.78C40.9067 44.6333 40.2933 44.48 39.68 44.32C39.0667 44.1467 38.5 43.92 37.98 43.64C37.4733 43.36 37.06 42.9933 36.74 42.54C36.4333 42.0733 36.28 41.4667 36.28 40.72C36.28 40.0267 36.46 39.3933 36.82 38.82C37.1933 38.2333 37.76 37.7667 38.52 37.42C39.28 37.06 40.2533 36.88 41.44 36.88C42.2267 36.88 43.0067 36.9933 43.78 37.22C44.5533 37.4333 45.22 37.7333 45.78 38.12L45.28 39.3C44.68 38.9 44.04 38.6067 43.36 38.42C42.6933 38.2333 42.0467 38.14 41.42 38.14C40.58 38.14 39.8867 38.2533 39.34 38.48C38.7933 38.7067 38.3867 39.0133 38.12 39.4C37.8667 39.7733 37.74 40.2 37.74 40.68C37.74 41.2267 37.8933 41.6667 38.2 42C38.52 42.3333 38.9333 42.5933 39.44 42.78C39.96 42.9667 40.5267 43.1333 41.14 43.28C41.7533 43.4267 42.36 43.5867 42.96 43.76C43.5733 43.9333 44.1333 44.16 44.64 44.44C45.16 44.7067 45.5733 45.0667 45.88 45.52C46.2 45.9733 46.36 46.5667 46.36 47.3C46.36 47.98 46.1733 48.6133 45.8 49.2C45.4267 49.7733 44.8533 50.24 44.08 50.6C43.32 50.9467 42.34 51.12 41.14 51.12ZM49.2847 51V40.5H50.7047V51H49.2847ZM50.0047 38.18C49.7114 38.18 49.4647 38.08 49.2647 37.88C49.0647 37.68 48.9647 37.44 48.9647 37.16C48.9647 36.88 49.0647 36.6467 49.2647 36.46C49.4647 36.26 49.7114 36.16 50.0047 36.16C50.298 36.16 50.5447 36.2533 50.7447 36.44C50.9447 36.6267 51.0447 36.86 51.0447 37.14C51.0447 37.4333 50.9447 37.68 50.7447 37.88C50.558 38.08 50.3114 38.18 50.0047 38.18ZM59.1358 54.98C58.1758 54.98 57.2558 54.84 56.3758 54.56C55.4958 54.28 54.7824 53.88 54.2358 53.36L54.9558 52.28C55.4491 52.72 56.0558 53.0667 56.7758 53.32C57.5091 53.5867 58.2824 53.72 59.0958 53.72C60.4291 53.72 61.4091 53.4067 62.0358 52.78C62.6624 52.1667 62.9758 51.2067 62.9758 49.9V47.28L63.1758 45.48L63.0358 43.68V40.5H64.3958V49.72C64.3958 51.5333 63.9491 52.86 63.0558 53.7C62.1758 54.5533 60.8691 54.98 59.1358 54.98ZM58.8758 50.6C57.8758 50.6 56.9758 50.3867 56.1758 49.96C55.3758 49.52 54.7424 48.9133 54.2758 48.14C53.8224 47.3667 53.5958 46.48 53.5958 45.48C53.5958 44.48 53.8224 43.6 54.2758 42.84C54.7424 42.0667 55.3758 41.4667 56.1758 41.04C56.9758 40.6133 57.8758 40.4 58.8758 40.4C59.8091 40.4 60.6491 40.5933 61.3958 40.98C62.1424 41.3667 62.7358 41.94 63.1758 42.7C63.6158 43.46 63.8358 44.3867 63.8358 45.48C63.8358 46.5733 63.6158 47.5 63.1758 48.26C62.7358 49.02 62.1424 49.6 61.3958 50C60.6491 50.4 59.8091 50.6 58.8758 50.6ZM59.0158 49.34C59.7891 49.34 60.4758 49.18 61.0758 48.86C61.6758 48.5267 62.1491 48.0733 62.4958 47.5C62.8424 46.9133 63.0158 46.24 63.0158 45.48C63.0158 44.72 62.8424 44.0533 62.4958 43.48C62.1491 42.9067 61.6758 42.46 61.0758 42.14C60.4758 41.8067 59.7891 41.64 59.0158 41.64C58.2558 41.64 57.5691 41.8067 56.9558 42.14C56.3558 42.46 55.8824 42.9067 55.5358 43.48C55.2024 44.0533 55.0358 44.72 55.0358 45.48C55.0358 46.24 55.2024 46.9133 55.5358 47.5C55.8824 48.0733 56.3558 48.5267 56.9558 48.86C57.5691 49.18 58.2558 49.34 59.0158 49.34ZM73.7072 40.4C74.5605 40.4 75.3072 40.5667 75.9472 40.9C76.6005 41.22 77.1072 41.7133 77.4672 42.38C77.8405 43.0467 78.0272 43.8867 78.0272 44.9V51H76.6072V45.04C76.6072 43.9333 76.3272 43.1 75.7672 42.54C75.2205 41.9667 74.4472 41.68 73.4472 41.68C72.7005 41.68 72.0472 41.8333 71.4872 42.14C70.9405 42.4333 70.5139 42.8667 70.2072 43.44C69.9139 44 69.7672 44.68 69.7672 45.48V51H68.3472V40.5H69.7072V43.38L69.4872 42.84C69.8205 42.08 70.3539 41.4867 71.0872 41.06C71.8205 40.62 72.6939 40.4 73.7072 40.4ZM93.0372 51.12C91.2505 51.12 89.8439 50.6067 88.8172 49.58C87.7905 48.5533 87.2772 47.0333 87.2772 45.02V37H88.7572V44.96C88.7572 46.6133 89.1305 47.8333 89.8772 48.62C90.6239 49.4067 91.6772 49.8 93.0372 49.8C94.4105 49.8 95.4705 49.4067 96.2172 48.62C96.9639 47.8333 97.3372 46.6133 97.3372 44.96V37H98.7772V45.02C98.7772 47.0333 98.2639 48.5533 97.2372 49.58C96.2239 50.6067 94.8239 51.12 93.0372 51.12ZM108.357 51.1C107.45 51.1 106.63 50.8933 105.897 50.48C105.164 50.0533 104.577 49.4467 104.137 48.66C103.71 47.86 103.497 46.8867 103.497 45.74C103.497 44.5933 103.71 43.6267 104.137 42.84C104.564 42.04 105.144 41.4333 105.877 41.02C106.61 40.6067 107.437 40.4 108.357 40.4C109.357 40.4 110.25 40.6267 111.037 41.08C111.837 41.52 112.464 42.1467 112.917 42.96C113.37 43.76 113.597 44.6867 113.597 45.74C113.597 46.8067 113.37 47.74 112.917 48.54C112.464 49.34 111.837 49.9667 111.037 50.42C110.25 50.8733 109.357 51.1 108.357 51.1ZM102.937 54.88V40.5H104.297V43.66L104.157 45.76L104.357 47.88V54.88H102.937ZM108.257 49.84C109.004 49.84 109.67 49.6733 110.257 49.34C110.844 48.9933 111.31 48.5133 111.657 47.9C112.004 47.2733 112.177 46.5533 112.177 45.74C112.177 44.9267 112.004 44.2133 111.657 43.6C111.31 42.9867 110.844 42.5067 110.257 42.16C109.67 41.8133 109.004 41.64 108.257 41.64C107.51 41.64 106.837 41.8133 106.237 42.16C105.65 42.5067 105.184 42.9867 104.837 43.6C104.504 44.2133 104.337 44.9267 104.337 45.74C104.337 46.5533 104.504 47.2733 104.837 47.9C105.184 48.5133 105.65 48.9933 106.237 49.34C106.837 49.6733 107.51 49.84 108.257 49.84Z" fill="white"/>
-        <mask id="mask0_20_181" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="16" y="9" width="315" height="72">
-        <rect x="16" y="9" width="315" height="72" rx="28" fill="url(#paint1_linear_20_181)"/>
-        </mask>
-        <g mask="url(#mask0_20_181)">
-        <path d="M319.863 -103.906C356.717 -88.9723 374.487 -46.9902 359.553 -10.1365C344.619 26.7172 302.637 44.4868 265.783 29.5529C228.93 14.6191 211.16 -27.363 226.094 -64.2167C241.028 -101.07 283.01 -118.84 319.863 -103.906Z" fill="url(#paint2_linear_20_181)"/>
-        <path d="M287.168 -83.0148C317.454 -108.782 362.894 -105.119 388.662 -74.8326C414.429 -44.5463 410.766 0.894169 380.479 26.6615C350.193 52.4289 304.753 48.7656 278.985 18.4793C253.218 -11.807 256.881 -57.2474 287.168 -83.0148Z" fill="url(#paint3_linear_20_181)"/>
-        </g>
-        <g clip-path="url(#clip0_20_181)">
-        <mask id="mask1_20_181" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="285" y="37" width="19" height="15">
-        <path d="M304 37H285V52H304V37Z" fill="white"/>
-        </mask>
-        <g mask="url(#mask1_20_181)">
-        <path d="M303.625 44.7051C303.625 44.5977 303.586 44.5098 303.508 44.4316L296.906 37.791C296.76 37.625 296.652 37.5859 296.545 37.5859C296.33 37.5859 296.164 37.752 296.164 37.957C296.164 38.0644 296.193 38.1621 296.271 38.2305L300.168 42.1367L302.502 44.3926L300.363 44.334H285.861C285.656 44.334 285.49 44.4902 285.49 44.7051C285.49 44.9199 285.656 45.0762 285.861 45.0762H300.363L302.502 45.0273L300.168 47.2734L296.271 51.1797C296.203 51.248 296.164 51.3555 296.164 51.4629C296.164 51.6582 296.33 51.8242 296.545 51.8242C296.652 51.8242 296.74 51.7852 296.818 51.707L303.508 44.9785C303.586 44.9004 303.625 44.8125 303.625 44.7051Z" fill="white"/>
-        </g>
-        </g>
-        <defs>
-        <filter id="filter0_d_20_181" x="0" y="0" width="347" height="104" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-        <feOffset dy="8"/>
-        <feGaussianBlur stdDeviation="8"/>
-        <feComposite in2="hardAlpha" operator="out"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0.105882 0 0 0 0 0.223529 0 0 0 0 1 0 0 0 0.2 0"/>
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_20_181"/>
-        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_20_181" result="shape"/>
-        </filter>
-        <linearGradient id="paint0_linear_20_181" x1="258.5" y1="117.5" x2="57" y2="-59" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#1433FF"/>
-        <stop offset="1" stop-color="#4960F9"/>
-        </linearGradient>
-        <linearGradient id="paint1_linear_20_181" x1="258.5" y1="118.5" x2="57" y2="-58" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#1433FF"/>
-        <stop offset="1" stop-color="#4960F9"/>
-        </linearGradient>
-        <linearGradient id="paint2_linear_20_181" x1="219.822" y1="-4.079" x2="366.605" y2="-58.04" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#5264F9"/>
-        <stop offset="1" stop-color="#3AF9EF"/>
-        </linearGradient>
-        <linearGradient id="paint3_linear_20_181" x1="493.02" y1="-6.78141" x2="260.06" y2="-59.9519" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#C72FF8" stop-opacity="0"/>
-        <stop offset="1" stop-color="#C72FF8"/>
-        </linearGradient>
-        <clipPath id="clip0_20_181">
-        <rect width="19" height="15" fill="white" transform="translate(285 37)"/>
-        </clipPath>
-        </defs>
-        </svg>
-        
-    
-    <script src="assets/css/script.js"></script>
-</body>
 
+        <!-- Parent Registration Form -->
+        <form id="parentForm" class="form-section">
+            <!-- Simplified parent form -->
+            <div class="form-row">
+                <div class="form-col">
+                    <label class="form-label" for="parentFirstName">First Name</label>
+                    <input type="text" id="parentFirstName" class="form-input" required>
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="parentLastName">Last Name</label>
+                    <input type="text" id="parentLastName" class="form-input" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="parentEmail">Email Address</label>
+                <input type="email" id="parentEmail" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="studentReference">Student's ID</label>
+                <input type="text" id="studentReference" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="parentPassword">Password</label>
+                <input type="password" id="parentPassword" class="form-input" required>
+            </div>
+
+            <button type="submit" class="submit-button">Create Account</button>
+        </form>
+
+        <!-- Teacher Registration Form -->
+        <form id="teacherForm" class="form-section">
+            <!-- Simplified teacher form -->
+            <div class="form-row">
+                <div class="form-col">
+                    <label class="form-label" for="teacherFirstName">First Name</label>
+                    <input type="text" id="teacherFirstName" class="form-input" required>
+                </div>
+                <div class="form-col">
+                    <label class="form-label" for="teacherLastName">Last Name</label>
+                    <input type="text" id="teacherLastName" class="form-input" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="teacherEmail">Email Address</label>
+                <input type="email" id="teacherEmail" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="subject">Subject</label>
+                <select id="subject" class="select-input" required>
+                    <option value="">Select subject</option>
+                    <option value="math">Mathematics</option>
+                    <option value="science">Science</option>
+                    <option value="english">English</option>
+                    <option value="history">History</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="teacherPassword">Password</label>
+                <input type="password" id="teacherPassword" class="form-input" required>
+            </div>
+
+            <button type="submit" class="submit-button">Create Account</button>
+        </form>
+    </div>
+
+    <script>
+        const roleTabs = document.querySelectorAll('.role-tab');
+        const forms = document.querySelectorAll('.form-section');
+        const steps = document.querySelectorAll('.form-step');
+        const nextButton = document.querySelector('.next-button');
+        const backButton = document.querySelector('.back-button');
+        const progressFill = document.querySelector('.progress-fill');
+        let currentStep = 0;
+
+        // Role switching
+        roleTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const role = tab.dataset.role;
+                roleTabs.forEach(t => t.classList.remove('active'));
+                forms.forEach(f => f.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(`${role}Form`).classList.add('active');
+            });
+        });
+
+        // Multi-step form navigation
+        function updateStep(direction) {
+            const totalSteps = steps.length;
+            currentStep = Math.max(0, Math.min(currentStep + direction, totalSteps - 1));
+            
+            steps.forEach((step, index) => {
+                step.style.display = index === currentStep ? 'block' : 'none';
+            });
+
+            backButton.style.display = currentStep === 0 ? 'none' : 'block';
+            nextButton.textContent = currentStep === totalSteps - 1 ? 'Submit' : 'Next';
+            
+            // Update progress bar
+            progressFill.style.width = `${((currentStep + 1) / totalSteps) * 100}%`;
+
+            // Update step indicators
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.toggle('active', index === currentStep);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentStep === steps.length - 1) {
+                // Handle form submission
+                document.getElementById('studentForm').submit();
+            } else {
+                updateStep(1);
+            }
+        });
+
+        backButton.addEventListener('click', () => updateStep(-1));
+
+        // Initialize form
+        updateStep(0);
+    </script>
+</body>
 </html>

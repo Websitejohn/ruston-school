@@ -1,480 +1,78 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruston School</title>
+  <title>Ruston Schools Splash Screen</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <style>
-    /* styles.css */
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* styles.css */
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #F2F2F2;
-    }
+.splash-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #372878;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-    .screen {
-      transition: opacity 0.5s ease-in-out;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 1;
-    }
+.logo {
+  margin-bottom: 5px;
+}
 
-    .screen.inactive {
-      opacity: 0;
-      pointer-events: none;
-    }
+.logo img {
+  width: 150px;
+  height: 150px;
+}
 
-    .screen.active {
-      opacity: 1;
-      z-index: 2;
-    }
+.logo-text {
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+</style>
+<script>
+  // script.js
 
-    .indicator {
-      transition: background-color 0.5s ease-in-out;
-    }
+// Set the duration of the splash screen in milliseconds
+const splashScreenDuration = 3000;
 
-    .indicator.active {
-      background-color: #3B2877;
-    }
+// Get the splash screen element
+const splashScreen = document.querySelector('.splash-screen');
 
-    .loading {
-      animation: loading 2s infinite;
-    }
-
-    @keyframes loading {
-      0% {
-        opacity: 0.5;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0.5;
-      }
-    }
-
-    .container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .circle {
-      position: absolute;
-      bottom: 0;
-      left: -134px;
-      bottom: -133px;
-      width: 470px;
-      height: 470px;
-      border-radius: 50%;
-      background-color: #F5F2FC;
-      z-index: -1000;
-    }
-
-    .logo {
-      position: absolute;
-      top: 5vh;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      margin-bottom: 20px;
-    }
-
-    .logo img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-    }
-
-    .illustration {
-      position: relative;
-      width: 256px;
-      height: 256px;
-      margin-top: 25vh;
-      margin-bottom: 10px;
-      z-index: 2;
-    }
-
-    .illustration img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .text {
-      position: relative;
-      width: 80%;
-      height: 50vh;
-      display: flex;
-      justify-content: flex-start;
-      align-items: left;
-      flex-direction: column;
-      z-index: 3;
-      margin-top: -10px;
-    }
-
-    .indicators {
-      position: absolute;
-      width: 80px;
-      height: 10px;
-      left: calc(50% - 80px/2);
-      bottom: 100px;
-      display: flex;
-      justify-content: space-between;
-      z-index: 1000;
-    }
-
-    @media (min-width: 768px) {
-      .indicators {
-        bottom: 40px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .indicators {
-        bottom: 10px;
-      }
-    }
-
-    .text h2 {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 31px;
-      margin-bottom: 10px;
-      color: #3B2877;
-    }
-
-    .button {
-      position: relative;
-      width: 80%;
-      height: 50px;
-      background-color: #3B2877;
-      color: #FFFFFF;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .button:hover {
-      background-color: #2F236F;
-    }
-
-    p {
-      font-family: 'Inter';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 15px;
-      /* identical to box height, or 83% */
-
-      color: #3B2877;
-
-      opacity: 0.8;
-
-    }
-
-    .circular-button {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #3B2877;
-      color: #FFFFFF;
-      border: none;
-      cursor: pointer;
-    }
-
-    .circular-button svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-    }
-
-    .indicator {
-      width: 10px;
-      height: 10px;
-      background: #B5BFFF;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .indicator.active {
-      width: 44px;
-      height: 10px;
-      background: #3B2877;
-      border-radius: 6px;
-    }
-
-    .back-button {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      font-size: 18px;
-      color: #3B2877;
-      text-decoration: none;
-    }
-
-    .back-button:hover {
-      color: #2F236F;
-    }
-
-    @media (max-width: 480px) {
-      .text {
-        width: 90%;
-      }
-
-      .illustration {
-        width: 200px;
-        height: 200px;
-      }
-
-      .indicators {
-        bottom: 80px;
-      }
-
-      .back-button {
-        bottom: 10px;
-      }
-
-      .circular-button {
-        bottom: 10px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .text {
-        width: 60%;
-      }
-
-      .illustration {
-        width: 350px;
-        height: 350px;
-      }
-
-      .indicators {
-        bottom: 80px;
-      }
-
-      .back-button {
-        bottom: 40px;
-      }
-
-      .circular-button {
-        bottom: 40px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .logo img {
-        width: 150px;
-        height: 150px;
-      }
-
-      .illustration {
-        width: 350px;
-        height: 350px;
-      }
-
-   
-    }
-
-    .preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #fff;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .loader {
-      width: 100px;
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .loader-inner {
-      width: 80px;
-      height: 80px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .loader-circle {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: #3B2877;
-      animation: loader-circle 1s infinite;
-    }
-
-    @keyframes loader-circle {
-      0% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.2);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .back-button,
-    .next-button {
-      pointer-events: auto;
-      /* Allow mouse events for buttons */
-    }
-
-    /* Add a max-width to the .text element to prevent it from getting too wide on large screens */
-    .text {
-      max-width: 600px;
-    }
-
-    /* Add a max-width to the .illustration element to prevent it from getting too wide on large screens */
-    .illustration {
-      max-width: 400px;
-    }
-
-    /* Add a max-width to the .indicators element to prevent it from getting too wide on large screens */
-    .indicators {
-      max-width: 200px;
-    }
-
-    /* Add a max-width to the .circular-button element to prevent it from getting too wide on large screens */
-    .circular-button {
-      max-width: 50px;
-    }
-
-    /* Add a max-width to the .back-button element to prevent it from getting too wide on large screens */
-    .back-button {
-      max-width: 100px;
-    }
-
-
-    /* Add a media query to adjust the padding of the .screen element on small screens */
-    @media (max-width: 480px) {
-      .screen {
-        padding: 20px;
-      }
-    }
-
-    /* Add a media query to adjust the padding of the .screen element on large screens */
-    @media (min-width: 768px) {
-      .screen {
-        padding: 40px;
-      }
-    }
-  </style>
+// Hide the splash screen after the specified duration
+setTimeout(() => {
+  splashScreen.style.display = 'none';
+}, splashScreenDuration);
+</script>
 </head>
-
 <body>
-  <div class="screen active">
-    <div class="circle"></div>
+  <div class="splash-screen">
     <div class="logo">
-      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Ruston Schools Logo">
     </div>
-    <div class="illustration">
-      <img src="assets/svg/welcom.svg" alt="Welcome illustration">
-    </div>
-    <div class="text">
-      <h2>Welcome to <br>Ruston School</h2>
-      <p>Developing a Total Child.</p>
-    </div>
-    <div class="indicators">
-      <div class="indicator active"></div>
-      <div class="indicator"></div>
-      <div class="indicator"></div>
-    </div>
-    <a href="#" class="back-button">Back</a>
-    <a href="#" class="circular-button next-button">
-      <svg src="assets/svg/Right-Arrow 1.svg"></svg>
-    </a>
-  </div>
-  <div class="screen inactive">
-    <div class="circle"></div>
-    <div class="logo">
-      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
-    </div>
-    <div class="illustration">
-      <img src="assets/svg/Learning-cuate.svg" alt="Welcome illustration">
-    </div>
-    <div class="text">
-      <h2>Our Mission</h2>
-      <p>To provide a safe and supportive learning environment.</p>
-    </div>
-    <div class="indicators">
-      <div class="indicator"></div>
-      <div class="indicator active"></div>
-      <div class="indicator"></div>
-    </div>
-    <a href="#" class="back-button">Back</a>
-    <a href="#" class="circular-button next-button">
-      <svg src="assets /svg/Right-Arrow 1.svg"></svg>
-    </a>
-  </div>
-  <div class="screen inactive">
-    <div class="circle"></div>
-    <div class="logo">
-      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
-    </div>
-    <div class="illustration">
-      <img src="assets/svg/Learning-pana.svg" alt="Welcome illustration">
-    </div>
-    <div class="text">
-      <h2>Join Us</h2>
-      <p>Become a part of our vibrant community.</p>
-    </div>
-    <div class="indicators">
-      <div class="indicator"></div>
-      <div class="indicator"></div>
-      <div class="indicator active"></div>
-    </div>
-    <div class="buttons">
-      <a href="#" class="button login">Login</a>
-      <a href="#" class="button register">Register</a>
+    <div class="logo-text">
+      <p>RUSTON <span style="color: #F6D937;">SCHOOLS</span></p>
     </div>
   </div>
   <script src="script.js"></script>
 </body>
-
 </html>

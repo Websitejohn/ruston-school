@@ -1,5 +1,3 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +18,58 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #F2F2F2;
+      background-color: #FFFF;
+    }
+
+    .screen {
+      transition: opacity 0.5s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .screen.inactive {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .screen.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .indicator {
+      transition: background-color 0.5s ease-in-out;
+    }
+
+    .indicator.active {
+      background-color: #3B2877;
+    }
+
+    .loading {
+      animation: loading 2s infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.5;
+      }
     }
 
     .container {
@@ -37,14 +86,15 @@
     .circle {
       position: absolute;
       bottom: 0;
-      left: -134px;
-      bottom: -133px;
+      left: -154px;
+      bottom: -150px;
       width: 470px;
       height: 470px;
       border-radius: 50%;
       background-color: #F5F2FC;
       z-index: -1000;
     }
+
     .logo {
       position: absolute;
       top: 5vh;
@@ -55,8 +105,8 @@
     }
 
     .logo img {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       object-fit: cover;
     }
 
@@ -64,7 +114,7 @@
       position: relative;
       width: 256px;
       height: 256px;
-      margin-top: 25vh;
+      margin-top: 20vh;
       margin-bottom: 10px;
       z-index: 2;
     }
@@ -78,13 +128,36 @@
     .text {
       position: relative;
       width: 80%;
-      height: 50vh;
+      height: 40vh;
       display: flex;
       justify-content: flex-start;
       align-items: left;
       flex-direction: column;
       z-index: 3;
       margin-top: -10px;
+    }
+
+    .indicators {
+      position: absolute;
+      width: 80px;
+      height: 10px;
+      left: calc(50% - 80px/2);
+      bottom: 100px;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    @media (min-width: 768px) {
+      .indicators {
+        bottom: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .indicators {
+        bottom: 10px;
+      }
     }
 
     .text h2 {
@@ -139,22 +212,12 @@
       cursor: pointer;
     }
 
-    .circular-button i {
+    .circular-button svg {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 24px;
-    }
-
-    .indicators {
-      position: absolute;
-      width: 80px;
-      height: 10px;
-      left: calc(50% - 80px/2);
-      bottom: 80px;
-      display: flex;
-      justify-content: space-between;
     }
 
     .indicator {
@@ -166,18 +229,255 @@
     }
 
     .indicator.active {
-      /* Rectangle 23 */
       width: 44px;
       height: 10px;
       background: #3B2877;
       border-radius: 6px;
+    }
+
+    .back-button {
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      font-size: 18px;
+      color: #3B2877;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      color: #2F236F;
+    }
+
+    @media (max-width: 480px) {
+      .text {
+        width: 90%;
+      }
+
+      .illustration {
+        width: 200px;
+        height: 200px;
+      }
+
+      .indicators {
+        bottom: 120px;
+      }
+
+      .back-button {
+        bottom: 10px;
+      }
+
+      .circular-button {
+        bottom: 10px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .text {
+        width: 60%;
+      }
+
+      .illustration {
+        width: 350px;
+        height: 350px;
+      }
+
+      .indicators {
+        bottom: 120px;
+      }
+
+      .back-button {
+        bottom: 40px;
+      }
+
+      .circular-button {
+        bottom: 40px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .logo img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .illustration {
+        width: 350px;
+        height: 350px;
+      }
+
 
     }
+
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader-inner {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .loader-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #3B2877;
+      animation: loader-circle 1s infinite;
+    }
+
+    @keyframes loader-circle {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .back-button,
+    .next-button {
+      pointer-events: auto;
+      /* Allow mouse events for buttons */
+    }
+
+    /* Add a max-width to the .text element to prevent it from getting too wide on large screens */
+    .text {
+      max-width: 600px;
+    }
+
+    /* Add a max-width to the .illustration element to prevent it from getting too wide on large screens */
+    .illustration {
+      max-width: 400px;
+    }
+
+    /* Add a max-width to the .indicators element to prevent it from getting too wide on large screens */
+    .indicators {
+      max-width: 200px;
+    }
+
+    /* Add a max-width to the .circular-button element to prevent it from getting too wide on large screens */
+    .circular-button {
+      max-width: 50px;
+    }
+
+    /* Add a max-width to the .back-button element to prevent it from getting too wide on large screens */
+    .back-button {
+      max-width: 100px;
+    }
+
+
+    /* Add a media query to adjust the padding of the .screen element on small screens */
+    @media (max-width: 480px) {
+      .screen {
+        padding: 20px;
+      }
+    }
+
+    /* Add a media query to adjust the padding of the .screen element on large screens */
+    @media (min-width: 768px) {
+      .screen {
+        padding: 40px;
+      }
+    }
+
+   
+
+    /* Add these styles to your CSS section */
+    .buttons {
+      display: flex;
+      gap: 20px;
+      width: 80%;
+      max-width: 400px;
+      margin-top: 24px;
+      margin-bottom: 32px;
+    }
+
+    .button {
+      flex: 1;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .button.login {
+      background-color: #3B2877;
+      color: #FFFFFF;
+      border: 2px solid #3B2877;
+    }
+
+    .button.login:hover {
+      background-color: #2F236F;
+      border-color: #2F236F;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+    }
+
+    .button.register {
+      background-color: transparent;
+      color: #3B2877;
+      border: 2px solid #3B2877;
+    }
+
+    .button.register:hover {
+      background-color: rgba(59, 40, 119, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.1);
+    }
+
+    /* Add responsive styles */
+    @media (max-width: 480px) {
+      .buttons {
+        flex-direction: column;
+        width: 90%;
+      }
+
+      .button {
+        width: 100%;
+        padding: 12px 20px;
+      }
+    }
+
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="preloader" id="preloader">
+    <div class="loader">
+      <div class="loader-inner">
+        <div class="loader-circle"></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen active">
     <div class="circle"></div>
     <div class="logo">
       <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
@@ -194,11 +494,61 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
     </div>
-    <button class="circular-button">
-      <i class="fas fa-arrow-right"></i>
-    </button>
+    
+    <a href="#" class="circular-button next-button" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </a>
   </div>
+  <div class="screen inactive">
+    <div class="circle"></div>
+    <div class="logo">
+      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+    </div>
+    <div class="illustration">
+      <img src="assets/svg/Learning-cuate.svg" alt="Welcome illustration">
+    </div>
+    <div class="text">
+      <h2>Our Mission</h2>
+      <p>To provide a safe and supportive learning environment.</p>
+    </div>
+    <div class="indicators">
+      <div class="indicator"></div>
+      <div class="indicator active"></div>
+      <div class="indicator"></div>
+    </div>
+    <a href="#" class="back-button">Back</a>
+    <a href="#" class="circular-button next-button" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </a>
+  </div>
+ <div class="screen inactive">
+  <div class="circle"></div>
+  <div class="logo">
+    <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+  </div>
+  <div class="illustration">
+    <img src="assets/svg/Learning-pana.svg" alt="Welcome illustration">
+  </div>
+  <div class="text">
+    <h2>Join Us</h2>
+    <p>Become a part of our vibrant community.</p>
+  </div>
+  <div class="indicators" role="tablist" aria-label="Presentation navigation">
+    <div class="indicator"></div>
+    <div class="indicator"></div>
+    <div class="indicator active"></div>
+  </div>
+  <div class="buttons">
+    <a href="signin.html" class="button login" role="button">Login</a>
+    <a href="signup.html" class="button register" role="button">Register</a>
+  </div>
+</div>
   <script src="script.js"></script>
+
 </body>
 
 </html>
