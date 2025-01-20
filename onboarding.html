@@ -114,7 +114,7 @@
       position: relative;
       width: 256px;
       height: 256px;
-      margin-top: 20vh;
+      margin-top: 35px;
       margin-bottom: 10px;
       z-index: 2;
     }
@@ -404,16 +404,20 @@
       }
     }
 
-   
 
-    /* Add these styles to your CSS section */
+
+
     .buttons {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 20px;
       width: 80%;
       max-width: 400px;
-      margin-top: 24px;
-      margin-bottom: 32px;
+      z-index: 10;
+      padding: 0 20px;
     }
 
     .button {
@@ -425,8 +429,31 @@
       text-align: center;
       text-decoration: none;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
     }
 
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .buttons {
+        bottom: 20px;
+        width: 90%;
+        padding: 0 16px;
+      }
+
+      .button {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* Safe area inset for modern devices */
+    @supports (padding: max(0px)) {
+      .buttons {
+        bottom: max(40px, env(safe-area-inset-bottom));
+      }
+    }
+
+    /* Keep your existing button styles */
     .button.login {
       background-color: #3B2877;
       color: #FFFFFF;
@@ -437,7 +464,7 @@
       background-color: #2F236F;
       border-color: #2F236F;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.2);
+      box-shadow: 0 6px 16px rgba(59, 40, 119, 0.3);
     }
 
     .button.register {
@@ -449,22 +476,8 @@
     .button.register:hover {
       background-color: rgba(59, 40, 119, 0.1);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(59, 40, 119, 0.1);
+      box-shadow: 0 6px 16px rgba(59, 40, 119, 0.1);
     }
-
-    /* Add responsive styles */
-    @media (max-width: 480px) {
-      .buttons {
-        flex-direction: column;
-        width: 90%;
-      }
-
-      .button {
-        width: 100%;
-        padding: 12px 20px;
-      }
-    }
-
   </style>
 </head>
 
@@ -493,7 +506,7 @@
       <div class="indicator"></div>
       <div class="indicator"></div>
     </div>
-    
+
     <a href="#" class="circular-button next-button" aria-label="Next">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M9 18l6-6-6-6" />
@@ -524,28 +537,28 @@
       </svg>
     </a>
   </div>
- <div class="screen inactive">
-  <div class="circle"></div>
-  <div class="logo">
-    <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+  <div class="screen inactive">
+    <div class="circle"></div>
+    <div class="logo">
+      <img src="assets/Png/Ruston_20240707_174335_0000.png" alt="Logo" loading="lazy">
+    </div>
+    <div class="illustration">
+      <img src="assets/svg/Learning-pana.svg" alt="Welcome illustration">
+    </div>
+    <div class="text">
+      <h2>Join Us</h2>
+      <p>Become a part of our vibrant community.</p>
+    </div>
+    <div class="indicators" role="tablist" aria-label="Presentation navigation">
+      <div class="indicator"></div>
+      <div class="indicator"></div>
+      <div class="indicator active"></div>
+    </div>
+    <div class="buttons">
+      <a href="signin.html" class="button login" role="button">Login</a>
+      <a href="signup.html" class="button register" role="button">Register</a>
+    </div>
   </div>
-  <div class="illustration">
-    <img src="assets/svg/Learning-pana.svg" alt="Welcome illustration">
-  </div>
-  <div class="text">
-    <h2>Join Us</h2>
-    <p>Become a part of our vibrant community.</p>
-  </div>
-  <div class="indicators" role="tablist" aria-label="Presentation navigation">
-    <div class="indicator"></div>
-    <div class="indicator"></div>
-    <div class="indicator active"></div>
-  </div>
-  <div class="buttons">
-    <a href="signin.html" class="button login" role="button">Login</a>
-    <a href="signup.html" class="button register" role="button">Register</a>
-  </div>
-</div>
   <script src="script.js"></script>
 
 </body>
